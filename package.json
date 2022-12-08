@@ -1,4 +1,9 @@
 {
 	"name": "potential-memory",
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.3.0",
+	"workspaces": [
+		"shared",
+		"server",
+		"client"
+	]
 }
