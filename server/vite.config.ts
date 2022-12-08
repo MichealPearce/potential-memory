@@ -3,6 +3,9 @@ import { VitePluginNode } from 'vite-plugin-node'
 import { resolve } from 'path'
 
 export default defineConfig({
+	envDir: '../.env',
+	envPrefix: ['SERVER_', 'CLIENT_'],
+
 	define: {
 		__APP_PATH__: `"${resolve('../')}"`,
 		__SERVER_PATH__: `"${resolve('./')}"`,
