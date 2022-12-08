@@ -9,7 +9,9 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		Layouts(),
-		Pages(),
+		Pages({
+			routeStyle: 'nuxt',
+		}),
 		Components({
 			deep: true,
 			directoryAsNamespace: true,
