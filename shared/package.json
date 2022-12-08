@@ -1,4 +1,4 @@
 {
-  "name": "shared",
-  "packageManager": "yarn@3.3.0"
+	"name": "shared",
+	"packageManager": "yarn@3.3.0"
 }
