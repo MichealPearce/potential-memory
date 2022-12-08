@@ -5,8 +5,7 @@
 		"shared",
 		"server",
 		"client"
-	],
-	"devDependencies": {
-		"sass": "^1.56.1"
+	]
+	
 	}
-}
+
