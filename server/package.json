@@ -5,21 +5,22 @@
 	"type": "module",
 	"scripts": {
 		"dev": "nodemon",
-		"build": "tsc && vite build",
-		"preview": "vite preview"
+		"build": "tsc && vite build"
 	},
 	"nodemonConfig": {
-		"exec": "vite-node src/main.ts",
+		"exec": "vite-node src/index.ts",
 		"ext": "ts,js,ejs",
 		"watch": "src"
 	},
 	"dependencies": {
+		"better-sqlite3": "^8.0.1",
 		"fastify": "^4.10.2",
 		"socket.io": "^4.5.4",
 		"typeorm": "^0.3.11"
 	},
 	"devDependencies": {
 		"@swc/core": "^1.3.21",
+		"@types/node": "^18.11.11",
 		"nodemon": "^2.0.20",
 		"typescript": "^4.6.4",
 		"vite": "^3.2.3",
