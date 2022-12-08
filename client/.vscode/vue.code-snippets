@@ -1,0 +1,56 @@
+{
+	"import-all-of-vue": {
+		"prefix": "import-vue",
+		"body": "import * as vue from 'vue'"
+	},
+	"vue-component": {
+		"prefix": "vue-component",
+		"body": [
+			"<script lang=\"ts\">",
+			"import { defineComponent } from 'vue'\n",
+			"export default defineComponent({",
+			"\tname: '$1',",
+			"})",
+			"</script>\n",
+			"<script lang=\"ts\" setup></script>\n",
+			"<template>",
+			"\t<${2:div} class=\"$3\">$0</${2:div}>",
+			"</template>\n",
+			"<style lang=\"scss\" scoped>",
+			".$3 {}",
+			"</style>\n"
+		]
+	},
+	"vue-component-dynamic-root": {
+		"prefix": "vue-component-dynamic-root",
+		"body": [
+			"<script lang=\"ts\">",
+			"import { defineComponent } from 'vue'\n",
+			"export default defineComponent({",
+			"\tname: '$1',",
+			"})",
+			"</script>\n",
+			"<script lang=\"ts\" setup>",
+			"type Props = {",
+			"\telement?: string",
+			"}\n",
+			"const props = withDefaults(defineProps<Props>(), {",
+			"\telement: '${2:div}'",
+			"})",
+			"</script>\n",
+			"<template>",
+			"\t<component :is=\"props.element\" class=\"$3\">$0</component>",
+			"</template>\n",
+			"<style lang=\"scss\" scoped>",
+			".$3 {}",
+			"</style>\n"
+		]
+	},
+	"vue-expose-unused": {
+		"prefix": "vue-expose-unused",
+		"body": [
+			"// only here because vetur says they are unused",
+			"defineExpose({ $0 })"
+		]
+	}
+}
