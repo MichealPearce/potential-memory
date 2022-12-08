@@ -2,19 +2,14 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'test',
+	name: 'app',
 })
 </script>
 
 <script lang="ts" setup></script>
 
 <template>
-	<button class="test">this is a test</button>
+	<RouterView />
 </template>
 
-<style lang="scss" scoped>
-.test {
-	text-transform: capitalize;
-	background-color: red;
-}
-</style>
+<style lang="scss" scoped></style>
