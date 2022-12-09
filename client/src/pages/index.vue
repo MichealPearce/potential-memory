@@ -11,6 +11,7 @@ export default defineComponent({
 <template>
 	<div class="index-page">
 		<RouterLink to="/about">About</RouterLink>
+		updated home
 	</div>
 </template>
 

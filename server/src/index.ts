@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import { registerDatabase } from 'server/database'
 import path from 'path'
+import fastifyStatic from '@fastify/static'
 
 const app = fastify()
 
@@ -11,8 +12,22 @@ async function registerPlugins() {
 	})
 }
 
+async function registerClient() {
+	const clientFolderPath = path.resolve(__APP_PATH__, 'dist/client')
+
+	await app.register(fastifyStatic, {
+		root: clientFolderPath,
+		wildcard: false,
+	})
+
+	app.get('/*', (_request, reply) => {
+		reply.sendFile('index.html')
+	})
+}
+
 async function start() {
 	await registerPlugins()
+	await registerClient()
 
 	const serverURL = new URL(import.meta.env.SERVER_URL)
 	const url = await app.listen({
