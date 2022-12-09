@@ -13,14 +13,16 @@
 			"path": "client"
 		}
 	],
-	"settings": {},
+	"settings": {
+		"typescript.tsdk": "potential-memory/node_modules/typescript/lib"
+	},
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [],
 		"compounds": [
 			{
 				"name": "dev",
-				"configurations": ["dev:client", "dev:server", "dev:shared"],
+				"configurations": ["dev:shared", "dev:server", "dev:client"],
 				"stopAll": true,
 				"presentation": {
 					"hidden": false,
