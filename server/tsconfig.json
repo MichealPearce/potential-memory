@@ -13,7 +13,14 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"server/*": ["./src/*"]
+		}
 	},
-	"include": ["src"]
+	"include": ["src", "vite.config.ts"]
 }

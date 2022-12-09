@@ -10,3 +10,11 @@
 !.yarn/cache
 #.pnp.*
 node_modules
+
+bin/*
+!bin/.nothing
+
+dist
+
+.env
+*.local
