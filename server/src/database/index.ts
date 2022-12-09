@@ -29,11 +29,17 @@ export const registerDatabase = definePlugin<{
 })
 
 async function test() {
-	const user = User.init({
+	const user = await User.findOneByOrFail({
 		name: 'test',
+		email: 'test@test.com',
+	}).catch(() => {
+		console.log('creating test user')
+		return User.init({
+			name: 'test',
+			email: 'test@test.com',
+			password: 'test',
+		}).save()
 	})
-
-	await user.reload()
 
 	console.log(user)
 }
