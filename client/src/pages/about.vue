@@ -2,19 +2,19 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'IndexPage',
+	name: 'AboutPage',
 })
 </script>
 
 <script lang="ts" setup></script>
 
 <template>
-	<div class="index-page">
-		<RouterLink to="/about">About</RouterLink>
+	<div class="about-page">
+		<RouterLink to="/">Home</RouterLink>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.index-page {
+.about-page {
 }
 </style>

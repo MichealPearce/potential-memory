@@ -18,4 +18,8 @@ export default defineConfig({
 			dts: './src/types/components.d.ts',
 		}),
 	],
+
+	build: {
+		outDir: '../dist/client',
+	},
 })
