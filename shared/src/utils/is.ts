@@ -55,7 +55,9 @@ export function notFunction<T>(thing: T): thing is Not<T, FunctionType> {
 	return not(isFunction(thing))
 }
 
-export function isString<T>(thing: T): thing is Is<T, string> {
+export function isString<T extends string>(
+	thing: unknown,
+): thing is Is<T, string> {
 	return typeof thing === 'string'
 }
 

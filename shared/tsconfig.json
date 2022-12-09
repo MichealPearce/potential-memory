@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"useDefineForClassFields": true,
-		"module": "System",
+		"module": "ESNext",
 		"lib": ["ESNext", "DOM"],
 		"moduleResolution": "Node",
 
@@ -10,7 +10,7 @@
 		"declaration": true,
 
 		"strict": true,
-		// "resolveJsonModule": true,
+		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"noUnusedLocals": true,
