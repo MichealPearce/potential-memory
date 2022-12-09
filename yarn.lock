@@ -1859,8 +1859,6 @@ __metadata:
 "potential-memory@workspace:.":
   version: 0.0.0-use.local
   resolution: "potential-memory@workspace:."
-  dependencies:
-    sass: ^1.56.1
   languageName: unknown
   linkType: soft
 
