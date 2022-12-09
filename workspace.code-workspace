@@ -13,5 +13,21 @@
 			"path": "client"
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [],
+		"compounds": [
+			{
+				"name": "dev",
+				"configurations": ["dev:client", "dev:server", "dev:shared"],
+				"stopAll": true,
+				"presentation": {
+					"hidden": false,
+					"group": "",
+					"order": 1
+				}
+			}
+		]
+	}
 }
