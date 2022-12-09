@@ -1,4 +1,12 @@
 {
 	"name": "shared",
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.3.0",
+	"main": "dist/index.js",
+	"scripts": {
+		"dev": "tsc -b -w",
+		"build": "tsc -b"
+	},
+	"devDependencies": {
+		"typescript": "^4.9.4"
+	}
 }
