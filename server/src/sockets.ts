@@ -19,10 +19,9 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 	})
 
 	function emitDynamic() {
-		si.getDynamicData(undefined, undefined, data => {
-			io.volatile.emit('dynamic', data)
-			emitDynamic()
-		})
+		si.getDynamicData(undefined, undefined, data => io.emit('dynamic', data))
+
+		setTimeout(emitDynamic, 10)
 	}
 
 	io.on('connection', socket => {

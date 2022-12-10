@@ -1,17 +1,33 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { datejs, useState } from '../../includes/functions'
 
 export default defineComponent({
 	name: 'NavigationMain',
 })
 </script>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const state = useState()
+
+const osName = computed(() => {
+	const s = state.static
+	if (!s.os) return 'Construct'
+	return `${s.os.distro} ${s.os.release}`
+})
+
+const time = computed(() => {
+	const s = state.dynamic
+	if (!s.time) return '00:00:00'
+	return datejs(s.time.current).format('HH:mm:ss')
+})
+</script>
 
 <template>
 	<nav class="navigation-main">
 		<div class="branding">
-			<h1>Server Dashboard</h1>
+			<h1>{{ osName }}</h1>
+			<h2>{{ time }}</h2>
 		</div>
 
 		<div class="menu">
@@ -29,7 +45,9 @@ export default defineComponent({
 	background-color: $background-color;
 
 	.branding {
+		@include flex(row, center, center);
 		padding: 0px 1em;
+		column-gap: 1em;
 	}
 
 	.menu {

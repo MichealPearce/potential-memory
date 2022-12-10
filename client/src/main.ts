@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { io } from 'socket.io-client'
+import { ClientState } from './types'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -18,7 +19,8 @@ app.use(router)
 const state = reactive({
 	static: {},
 	dynamic: {},
-})
+}) as ClientState
+
 const socket = io('http://localhost:3001')
 
 socket.on('static', (data: any) => {
@@ -30,6 +32,7 @@ socket.on('dynamic', (data: any) => {
 	Object.assign(state.dynamic, data)
 })
 
+app.provide('state', state)
 app.provide('socket', socket)
 
 app.mount('#app')

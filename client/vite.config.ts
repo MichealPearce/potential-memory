@@ -12,6 +12,7 @@ export default defineConfig(env => {
 	const envars = loadEnv(env.mode, '../', ['CLIENT_'])
 	const clientURL = new URL(envars.CLIENT_URL ?? 'http://localhost:3000')
 
+	console.log(clientURL)
 	return {
 		envPrefix: 'CLIENT_',
 

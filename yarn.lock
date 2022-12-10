@@ -993,8 +993,10 @@ __metadata:
   resolution: "client@workspace:client"
   dependencies:
     "@vitejs/plugin-vue": ^3.2.0
+    dayjs: ^1.11.7
     sass: ^1.56.1
     socket.io-client: ^4.5.4
+    systeminformation: ^5.16.5
     typescript: ^4.6.4
     unplugin-vue-components: ^0.22.11
     vite: ^3.2.3
@@ -1147,6 +1149,13 @@ __metadata:
   version: 2.29.3
   resolution: "date-fns@npm:2.29.3"
   checksum: e01cf5b62af04e05dfff921bb9c9933310ed0e1ae9a81eb8653452e64dc841acf7f6e01e1a5ae5644d0337e9a7f936175fd2cb6819dc122fdd9c5e86c56be484
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.7":
+  version: 1.11.7
+  resolution: "dayjs@npm:1.11.7"
+  checksum: 5003a7c1dd9ed51385beb658231c3548700b82d3548c0cfbe549d85f2d08e90e972510282b7506941452c58d32136d6362f009c77ca55381a09c704e9f177ebb
   languageName: node
   linkType: hard
 

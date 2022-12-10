@@ -9,10 +9,10 @@ export default defineComponent({
 <script lang="ts" setup></script>
 
 <template>
-	<div class="about-page">
+	<ConstructPage class="about-page">
 		<RouterLink to="/">Home</RouterLink>
 		updated about
-	</div>
+	</ConstructPage>
 </template>
 
 <style lang="scss" scoped>

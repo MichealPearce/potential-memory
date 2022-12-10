@@ -1,8 +1,6 @@
-export interface StaticData {}
-
-export interface DynamicData {}
+import type { Systeminformation } from 'systeminformation'
 
 export interface ClientState {
-	static: StaticData
-	dynamic: DynamicData
+	static: Systeminformation.StaticData
+	dynamic: Systeminformation.DynamicData
 }

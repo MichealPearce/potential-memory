@@ -1,12 +1,17 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useState } from '../includes/functions'
 
 export default defineComponent({
 	name: 'IndexPage',
 })
 </script>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const state = useState()
+
+const mem = computed(() => state.dynamic.mem)
+</script>
 
 <template>
 	<div class="index-page">
