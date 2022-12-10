@@ -16,12 +16,16 @@ const mem = computed(() => state.dynamic.mem)
 <template>
 	<div class="index-page">
 		<DataMemory />
+		<DataCpu />
+		<DataNetwork />
 	</div>
 </template>
 
 <style lang="scss" scoped>
 .index-page {
+	@include flex(row, space-around, center);
 	padding: 1em;
+	row-gap: 2em;
 }
 
 .data-memory {

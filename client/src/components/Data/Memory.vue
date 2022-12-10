@@ -25,7 +25,7 @@ const percentageUsed = computed<number>(() => {
 		return 0
 	}
 	const percentage = (mem.value.active / mem.value.total) * 100
-	return toNumber(percentage.toFixed(2))
+	return toNumber(percentage.toFixed(1))
 })
 </script>
 
@@ -40,10 +40,11 @@ const percentageUsed = computed<number>(() => {
 <style lang="scss" scoped>
 .data-memory {
 	@include flex(column, center, center);
+
 	width: 33%;
 	font-weight: 400;
 	border: 1px solid white;
 
-	padding: 1em;
+	padding: 2.75em;
 }
 </style>
