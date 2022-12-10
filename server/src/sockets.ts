@@ -18,13 +18,17 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 		},
 	})
 
+	function emitDynamic() {
+		si.getDynamicData(undefined, undefined, data => {
+			io.volatile.emit('dynamic', data)
+			emitDynamic()
+		})
+	}
+
 	io.on('connection', socket => {
 		console.log('a user connected')
 
-		socket.on('static', (cb: any) => si.getStaticData(cb))
-		socket.on('dynamic', (cb: any) =>
-			si.getDynamicData(undefined, undefined, cb),
-		)
+		si.getStaticData(data => socket.emit('static', data))
 
 		socket.on('disconnect', () => {
 			console.log('user disconnected')
@@ -32,4 +36,5 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 	})
 
 	instance.decorate('io', io)
+	emitDynamic()
 })

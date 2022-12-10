@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import generatedRoutes from 'virtual:generated-pages'
@@ -15,7 +15,21 @@ const router = createRouter({
 const app = createApp(App)
 app.use(router)
 
+const state = reactive({
+	static: {},
+	dynamic: {},
+})
 const socket = io('http://localhost:3001')
+
+socket.on('static', (data: any) => {
+	console.log('static updated')
+	Object.assign(state.static, data)
+})
+socket.on('dynamic', (data: any) => {
+	console.log('dynamic updated')
+	Object.assign(state.dynamic, data)
+})
+
 app.provide('socket', socket)
 
 app.mount('#app')
