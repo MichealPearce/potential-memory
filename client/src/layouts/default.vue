@@ -9,7 +9,21 @@ export default defineComponent({
 <script lang="ts" setup></script>
 
 <template>
-	<RouterView />
+	<ConstructLayout class="default-layout">
+		<NavigationMain />
+
+		<RouterView />
+	</ConstructLayout>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.default-layout {
+	// @include flex(column);
+
+	.navigation-main {
+		position: sticky;
+		left: 0px;
+		top: 0px;
+	}
+}
+</style>

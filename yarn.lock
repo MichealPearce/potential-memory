@@ -461,7 +461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-sfc@npm:3.2.45, @vue/compiler-sfc@npm:^3.2.31, @vue/compiler-sfc@npm:^3.2.45":
+"@vue/compiler-sfc@npm:3.2.45, @vue/compiler-sfc@npm:^3.2.4, @vue/compiler-sfc@npm:^3.2.45":
   version: 3.2.45
   resolution: "@vue/compiler-sfc@npm:3.2.45"
   dependencies:
@@ -994,12 +994,13 @@ __metadata:
   dependencies:
     "@vitejs/plugin-vue": ^3.2.0
     sass: ^1.56.1
+    socket.io-client: ^4.5.4
     typescript: ^4.6.4
     unplugin-vue-components: ^0.22.11
     vite: ^3.2.3
     vite-plugin-pages: ^0.27.1
-    vite-plugin-vue-layouts: ^0.7.0
-    vue: ^3.2.41
+    vite-plugin-vue-layouts: ^0.6.0
+    vue: ^3.2.45
     vue-router: ^4.1.6
     vue-tsc: ^1.0.12
   languageName: unknown
@@ -1313,6 +1314,19 @@ __metadata:
   dependencies:
     once: ^1.4.0
   checksum: 530a5a5a1e517e962854a31693dbb5c0b2fc40b46dad2a56a2deec656ca040631124f4795823acc68238147805f8b021abbe221f4afed5ef3c8e8efc2024908b
+  languageName: node
+  linkType: hard
+
+"engine.io-client@npm:~6.2.3":
+  version: 6.2.3
+  resolution: "engine.io-client@npm:6.2.3"
+  dependencies:
+    "@socket.io/component-emitter": ~3.1.0
+    debug: ~4.3.1
+    engine.io-parser: ~5.0.3
+    ws: ~8.2.3
+    xmlhttprequest-ssl: ~2.0.0
+  checksum: c09fb6429503a4a8a599ec1c4f67f100202e6e06588b67b81d386a4ebf8e81160cf7501ad6770ffe0a04575f41868f0a4cbf330b85de3f7cd24ebcf2bf9fc660
   languageName: node
   linkType: hard
 
@@ -1740,7 +1754,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.12":
+"fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.7":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
   dependencies:
@@ -3711,6 +3725,7 @@ __metadata:
     nodemon: ^2.0.20
     shared: "workspace:*"
     socket.io: ^4.5.4
+    systeminformation: ^5.16.5
     typeorm: ^0.3.11
     typescript: ^4.6.4
     vite: ^3.2.3
@@ -3839,6 +3854,18 @@ __metadata:
   version: 2.4.0
   resolution: "socket.io-adapter@npm:2.4.0"
   checksum: a84639946dce13547b95f6e09fe167cdcd5d80941afc2e46790cc23384e0fd3c901e690ecc9bdd600939ce6292261ee15094a0b486f797ed621cfc8783d87a0c
+  languageName: node
+  linkType: hard
+
+"socket.io-client@npm:^4.5.4":
+  version: 4.5.4
+  resolution: "socket.io-client@npm:4.5.4"
+  dependencies:
+    "@socket.io/component-emitter": ~3.1.0
+    debug: ~4.3.2
+    engine.io-client: ~6.2.3
+    socket.io-parser: ~4.2.1
+  checksum: 8320ce4a96e9c28318b17037e412746b1d612cfba653c3c321c0e49042f0be9aeb8de67d5861e45e9aad32407bb4dd204bfe199565d78d5320aaf65253371b7f
   languageName: node
   linkType: hard
 
@@ -4082,6 +4109,16 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
+"systeminformation@npm:^5.16.5":
+  version: 5.16.5
+  resolution: "systeminformation@npm:5.16.5"
+  bin:
+    systeminformation: lib/cli.js
+  checksum: 33cf64eca686358db8d38b17939f33656197678a37f401b916d7509c1d84e9f5389c29570bf94dc1a97e274617e6ff90dc36515a98541aca6f72703200bb718a
+  conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
 
@@ -4488,18 +4525,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-vue-layouts@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "vite-plugin-vue-layouts@npm:0.7.0"
+"vite-plugin-vue-layouts@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "vite-plugin-vue-layouts@npm:0.6.0"
   dependencies:
-    "@vue/compiler-sfc": ^3.2.31
-    debug: ^4.3.3
-    fast-glob: ^3.2.11
+    "@vue/compiler-sfc": ^3.2.4
+    debug: ^4.3.2
+    fast-glob: ^3.2.7
   peerDependencies:
-    vite: ^2.5.0 || ^3.0.0-0
+    vite: ^2.5.0
     vue: ^2.6.12 || ^3.2.4
     vue-router: ^3.5.1 || ^ 4.0.11
-  checksum: 78f1622a170693348271e5f200de0a505a916b878c47e43b30c2734f946bf289d743bd707687a1b04abdf2a756ccb1985401a1932afb979c621ce327cb7f6749
+  checksum: c804d88c897bf499dd4137342dc01940f698b9862a97a04a4af36917079d099d575fde38d20caf195be445525a23a5ea3636215a3df0684435d0f39f82a60c14
   languageName: node
   linkType: hard
 
@@ -4576,7 +4613,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.2.41":
+"vue@npm:^3.2.45":
   version: 3.2.45
   resolution: "vue@npm:3.2.45"
   dependencies:
@@ -4720,6 +4757,13 @@ __metadata:
   version: 11.0.1
   resolution: "xmlbuilder@npm:11.0.1"
   checksum: 7152695e16f1a9976658215abab27e55d08b1b97bca901d58b048d2b6e106b5af31efccbdecf9b07af37c8377d8e7e821b494af10b3a68b0ff4ae60331b415b0
+  languageName: node
+  linkType: hard
+
+"xmlhttprequest-ssl@npm:~2.0.0":
+  version: 2.0.0
+  resolution: "xmlhttprequest-ssl@npm:2.0.0"
+  checksum: 1e98df67f004fec15754392a131343ea92e6ab5ac4d77e842378c5c4e4fd5b6a9134b169d96842cc19422d77b1606b8df84a5685562b3b698cb68441636f827e
   languageName: node
   linkType: hard
 

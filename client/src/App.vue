@@ -12,4 +12,42 @@ export default defineComponent({
 	<RouterView />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+* {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+	width: 100%;
+	height: 100%;
+
+	padding: 0px;
+	margin: 0px;
+
+	background-color: $background-color;
+	color: white;
+
+	font-family: 'Roboto', sans-serif;
+	font-size: medium;
+
+	overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	padding: 0.5em 0px;
+	margin: 0px;
+	font-weight: 500;
+}
+
+p {
+	padding: 0.5em 0px;
+	margin: 0px;
+}
+</style>
