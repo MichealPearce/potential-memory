@@ -15,13 +15,15 @@ const mem = computed(() => state.dynamic.mem)
 
 <template>
 	<div class="index-page">
-		<RouterLink to="/about">About</RouterLink>
-		updated home
+		<DataMemory />
 	</div>
 </template>
 
 <style lang="scss" scoped>
 .index-page {
-	height: 10000px;
+	padding: 1em;
+}
+
+.data-memory {
 }
 </style>

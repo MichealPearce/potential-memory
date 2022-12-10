@@ -21,7 +21,7 @@ const state = reactive({
 	dynamic: {},
 }) as ClientState
 
-const socket = io('http://localhost:3001')
+const socket = io('http://localhost:4001')
 
 socket.on('static', (data: any) => {
 	console.log('static updated')
