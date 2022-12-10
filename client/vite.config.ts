@@ -9,10 +9,10 @@ const sassyPath = path.resolve(__dirname, 'src/sassy.scss')
 
 // https://vitejs.dev/config/
 export default defineConfig(env => {
-	const envars = loadEnv(env.mode, '../', ['CLIENT_'])
+	const envars = loadEnv(env.mode, '../', ['CLIENT_', 'SERVER_'])
 	const clientURL = new URL(envars.CLIENT_URL ?? 'http://localhost:3000')
+	const serverURL = envars.SERVER_URL ?? 'http://localhost:3001'
 
-	console.log(clientURL)
 	return {
 		envPrefix: 'CLIENT_',
 
@@ -27,6 +27,17 @@ export default defineConfig(env => {
 
 		server: {
 			port: Number(clientURL.port),
+			proxy: {
+				'/api': {
+					target: serverURL,
+					changeOrigin: true,
+				},
+				'/socket.io': {
+					target: serverURL,
+					changeOrigin: true,
+					ws: true,
+				},
+			},
 		},
 
 		plugins: [
