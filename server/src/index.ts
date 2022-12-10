@@ -2,6 +2,7 @@ import fastify from 'fastify'
 import { registerDatabase } from 'server/database'
 import path from 'path'
 import fastifyStatic from '@fastify/static'
+import { registerSockets } from 'server/sockets'
 
 const app = fastify()
 
@@ -10,6 +11,8 @@ async function registerPlugins() {
 		type: 'better-sqlite3',
 		database: path.resolve(__BIN_PATH__, 'database.sqlite'),
 	})
+
+	await app.register(registerSockets)
 }
 
 async function registerClient() {

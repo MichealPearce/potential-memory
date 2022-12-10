@@ -1,15 +1,51 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent, onMounted, reactive } from 'vue'
+import { useSocket } from './includes/functions'
 
 export default defineComponent({
 	name: 'App',
 })
 </script>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const socket = useSocket()
+
+const mem = reactive({
+	active: 0,
+	available: 0,
+	buffcache: 0,
+	buffers: 0,
+	cached: 0,
+	free: 0,
+	slab: 0,
+	swapfree: 0,
+	swaptotal: 0,
+	swapused: 0,
+	total: 0,
+	used: 0,
+})
+
+const percentUsed = computed(() => {
+	if (mem.total === 0) return 0
+	return ((mem.active / mem.total) * 100).toFixed(4)
+})
+
+function fetchDyn() {
+	socket.emit('dynamic', (data: any) => {
+		if (data.mem) Object.assign(mem, data.mem)
+		setTimeout(fetchDyn, 100)
+	})
+}
+
+onMounted(fetchDyn)
+</script>
 
 <template>
-	<RouterView />
+	<div>
+		{{ percentUsed }}
+
+		<RouterView />
+	</div>
 </template>
 
 <style lang="scss">
