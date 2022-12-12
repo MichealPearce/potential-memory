@@ -23,11 +23,7 @@ const mem = computed(() => state.dynamic.mem)
 
 <style lang="scss" scoped>
 .index-page {
-	@include flex(row, space-around, center);
+	@include flex(row, space-between, center);
 	padding: 1em;
-	row-gap: 2em;
-}
-
-.data-memory {
 }
 </style>
