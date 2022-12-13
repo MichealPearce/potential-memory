@@ -41,7 +41,6 @@ const percentageUsed = computed<number>(() => {
 .data-memory {
 	@include flex(column, center, center);
 
-	width: 33%;
 	font-weight: 400;
 	border: 1px solid white;
 

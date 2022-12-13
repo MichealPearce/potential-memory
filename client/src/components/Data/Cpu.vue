@@ -1,5 +1,4 @@
 <script lang="ts">
-import { currentLoad } from 'systeminformation'
 import { computed, defineComponent } from 'vue'
 import { useState } from '../../includes/functions'
 
@@ -30,8 +29,14 @@ const cpuTemp = computed(() => {
 <template>
 	<div class="data-cpu">
 		<h1>CPU</h1>
-		Current load: <span class="cpu-percentage">{{ cpuLoad }}</span> Current
-		temperature: <span class="cpu-percentage">{{ cpuTemp }}</span>
+		<div class="stat">
+			Current load:
+			<span class="cpu-percentage">{{ cpuLoad }}</span>
+		</div>
+		<div class="stat">
+			Current temperature:
+			<span class="cpu-temp">{{ cpuTemp }}</span>
+		</div>
 	</div>
 </template>
 
@@ -39,7 +44,6 @@ const cpuTemp = computed(() => {
 .data-cpu {
 	@include flex(column, center, center);
 
-	width: 33%;
 	font-weight: 400;
 	border: 1px solid white;
 
@@ -49,5 +53,14 @@ const cpuTemp = computed(() => {
 .cpu-percentage {
 	font-size: 2em;
 	font-weight: bold;
+}
+
+.cpu-temp {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.stat {
+	@include flex(column, center, center);
 }
 </style>

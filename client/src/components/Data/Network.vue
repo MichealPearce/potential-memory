@@ -24,18 +24,21 @@ const netUsed = computed(() => {
 <template>
 	<div class="data-network">
 		<h1>Network Latency</h1>
-		<p>{{ netUsed }}</p>
+		<p class="net-used">{{ netUsed }}</p>
 	</div>
 </template>
 
 <style lang="scss" scoped>
 .data-network {
 	@include flex(column, center, center);
-	height: 13.6em;
-	width: 33%;
+
 	font-weight: 400;
 	border: 1px solid white;
 
 	padding: 2.75em;
+	&.net-used {
+		font-size: 5em;
+		font-weight: bold;
+	}
 }
 </style>
