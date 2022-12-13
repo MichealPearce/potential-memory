@@ -10,8 +10,12 @@ declare module '@vue/runtime-core' {
     ConstructLayout: typeof import('./../components/Construct/Layout.vue')['default']
     ConstructLink: typeof import('./../components/Construct/Link.vue')['default']
     ConstructPage: typeof import('./../components/Construct/Page.vue')['default']
+    DataCpu: typeof import('./../components/Data/Cpu.vue')['default']
+    DataMemory: typeof import('./../components/Data/Memory.vue')['default']
+    DataNetwork: typeof import('./../components/Data/Network.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     NavigationMain: typeof import('./../components/Navigation/Main.vue')['default']
+    ProgressBar: typeof import('./../components/ProgressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
