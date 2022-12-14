@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { Socket } from 'socket.io-client'
 import { inject } from 'vue'
-import { ClientState } from '../types'
+import { ClientState, MiddlewareHandler } from '../types'
 
 export const datejs = dayjs
 
@@ -23,4 +23,10 @@ export function formatBytes(bytes: number, decimals = 2) {
 	const i = Math.floor(Math.log(bytes) / Math.log(k))
 
 	return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
+
+export function defineMiddleware(
+	handler: MiddlewareHandler,
+): MiddlewareHandler {
+	return handler
 }

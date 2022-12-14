@@ -1,9 +1,13 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useState } from '../includes/functions'
+import { authed } from '../middleware/authed'
 
 export default defineComponent({
 	name: 'IndexPage',
+	meta: {
+		middleware: [authed],
+	},
 })
 </script>
 
@@ -15,6 +19,7 @@ const mem = computed(() => state.dynamic.mem)
 
 <template>
 	<div class="index-page">
+		<RouterLink to="/about">About</RouterLink>
 		<DataMemory />
 		<DataCpu />
 		<DataNetwork />

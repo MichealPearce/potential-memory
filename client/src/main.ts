@@ -1,25 +1,16 @@
-import { createApp, reactive } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import { createRouter, createWebHistory } from 'vue-router'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { io } from 'socket.io-client'
-import { ClientState } from './types'
+import { setupRouter } from './includes/setupRouter'
+import { state } from './includes/state'
 
 const routes = setupLayouts(generatedRoutes)
-
-const router = createRouter({
-	routes,
-	history: createWebHistory(),
-})
+const router = setupRouter(routes)
 
 const app = createApp(App)
 app.use(router)
-
-const state = reactive({
-	static: {},
-	dynamic: {},
-}) as ClientState
 
 const socket = io()
 
@@ -27,6 +18,7 @@ socket.on('static', (data: any) => {
 	console.log('static updated')
 	Object.assign(state.static, data)
 })
+
 socket.on('dynamic', (data: any) => {
 	console.log('dynamic updated')
 	Object.assign(state.dynamic, data)

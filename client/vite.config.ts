@@ -47,6 +47,7 @@ export default defineConfig(env => {
 			}),
 			Pages({
 				routeStyle: 'nuxt',
+				// routeBlockLang: 'yml',
 			}),
 			Components({
 				deep: true,
