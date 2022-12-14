@@ -4,6 +4,6 @@ import { ComponentMeta } from '.'
 
 declare module '@vue/runtime-core' {
 	interface ComponentCustomOptions {
-		meta: ComponentMeta
+		meta?: ComponentMeta
 	}
 }
