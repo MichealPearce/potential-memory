@@ -19,7 +19,6 @@ const mem = computed(() => state.dynamic.mem)
 
 <template>
 	<div class="index-page">
-		<RouterLink to="/about">About</RouterLink>
 		<DataMemory />
 		<DataCpu />
 		<DataNetwork />
