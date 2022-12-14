@@ -1,7 +1,5 @@
 <script lang="ts">
-import { sleep } from 'shared'
 import { defineComponent } from 'vue'
-import { authed } from '../middleware/authed'
 
 export default defineComponent({
 	name: 'DefaultLayout',
