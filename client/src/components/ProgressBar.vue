@@ -11,12 +11,12 @@ const props = defineProps<{
 	percentage: number
 }>()
 
-const percentage = computed(() => `${props.percentage}%`)
+const percent = computed(() => `${props.percentage}%`)
 </script>
 
 <template>
 	<div class="progress-bar">
-		<span class="percent">{{ percentage }}</span>
+		<span class="percent">{{ percent }}</span>
 	</div>
 </template>
 
