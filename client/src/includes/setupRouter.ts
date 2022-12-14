@@ -1,19 +1,19 @@
 import {
 	clone,
-	FunctionType,
 	inObject,
 	isArray,
 	isDefined,
 	isFunction,
 	isObject,
 } from 'shared'
+import { App } from 'vue'
 import {
 	RouteRecordRaw,
-	Router,
 	createRouter,
 	createWebHistory,
 	RouteLocationNormalized,
 } from 'vue-router'
+import { MiddlewareHandler } from '../types'
 
 function hasMeta(thing: any): thing is { meta: Record<any, any> } {
 	return inObject(thing, ['meta']) && isObject(thing.meta)
@@ -30,28 +30,30 @@ function setupRouteMeta(routes: RouteRecordRaw[]): void {
 	}
 }
 
-async function handleMiddleware(
-	to: RouteLocationNormalized,
-	from: RouteLocationNormalized,
-) {
-	const middlewares: Set<FunctionType> = new Set()
-	for (const matched of to.matched) {
-		if (!hasMeta(matched)) continue
+function setupMiddleware(app: App) {
+	return async function handleMiddleware(
+		to: RouteLocationNormalized,
+		from: RouteLocationNormalized,
+	) {
+		const middlewares: Set<MiddlewareHandler> = new Set()
+		for (const matched of to.matched) {
+			if (!hasMeta(matched)) continue
 
-		const middleware = matched.meta.middleware
-		if (isArray(middleware))
-			for (const m of middleware.filter(isFunction)) {
-				middlewares.add(m)
-			}
-	}
+			const middleware = matched.meta.middleware
+			if (isArray(middleware))
+				for (const m of middleware.filter(isFunction)) {
+					middlewares.add(m)
+				}
+		}
 
-	for (const mw of middlewares) {
-		const result = await mw(to, from)
-		if (isDefined(result)) return result
+		for (const mw of middlewares) {
+			const result = await mw(to, from, app)
+			if (isDefined(result)) return result
+		}
 	}
 }
 
-export function setupRouter(routes: RouteRecordRaw[]): Router {
+export function setupRouter(app: App, routes: RouteRecordRaw[]): void {
 	setupRouteMeta(routes)
 	console.log(routes)
 
@@ -60,7 +62,7 @@ export function setupRouter(routes: RouteRecordRaw[]): Router {
 		history: createWebHistory(),
 	})
 
-	router.beforeEach(handleMiddleware)
+	router.beforeEach(setupMiddleware(app))
 
-	return router
+	app.use(router)
 }
