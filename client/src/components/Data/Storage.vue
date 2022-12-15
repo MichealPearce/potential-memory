@@ -1,6 +1,13 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { useState } from '../../includes/functions'
+import { Systeminformation } from 'systeminformation'
+import {
+	computed,
+	defineComponent,
+	onBeforeMount,
+	onMounted,
+	reactive,
+} from 'vue'
+import { useSocket, useState } from '../../includes/functions'
 
 export default defineComponent({
 	name: 'DataStorage',
@@ -8,12 +15,28 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-const state = useState()
+const socket = useSocket()
 
-const volumes = computed(() => {
-	if (!state.dynamic.fsSize) return []
-	return state.dynamic.fsSize
+// use object instead of array so we can easily replace the entire array without losing reactivity
+const state = reactive({
+	volumes: [] as Systeminformation.FsSizeData[],
 })
+
+let timer: any
+
+function fetchVolumes() {
+	console.log('fetching volumes')
+	socket.emit('fsSize', (data: Systeminformation.FsSizeData[]) => {
+		state.volumes = data
+	})
+}
+
+onMounted(() => {
+	fetchVolumes()
+	timer = setInterval(fetchVolumes, 10000)
+})
+
+onBeforeMount(() => clearInterval(timer))
 </script>
 
 <template>
@@ -22,7 +45,7 @@ const volumes = computed(() => {
 
 		<div class="volumes">
 			<DataStorageVolume
-				v-for="volume of volumes"
+				v-for="volume of state.volumes"
 				:volume="volume"
 			/>
 		</div>

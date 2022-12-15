@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { definePlugin } from 'server/includes/functions'
+import { FunctionType } from 'shared'
 import { Server } from 'socket.io'
 import si from 'systeminformation'
 
@@ -20,14 +21,15 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 
 	function emitDynamic() {
 		si.getDynamicData(undefined, undefined, data => io.emit('dynamic', data))
-
-		setTimeout(emitDynamic, 10)
+		setTimeout(emitDynamic, 1000)
 	}
 
 	io.on('connection', socket => {
 		console.log('a user connected')
 
 		si.getStaticData(data => socket.emit('static', data))
+
+		socket.on('fsSize', si.fsSize)
 
 		socket.on('disconnect', () => {
 			console.log('user disconnected')
