@@ -1,6 +1,5 @@
 import { FastifyInstance } from 'fastify'
 import { definePlugin } from 'server/includes/functions'
-import { FunctionType } from 'shared'
 import { Server } from 'socket.io'
 import si from 'systeminformation'
 
@@ -30,6 +29,8 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 		si.getStaticData(data => socket.emit('static', data))
 
 		socket.on('fsSize', si.fsSize)
+		socket.on('currentLoad', si.currentLoad)
+		socket.on('cpuTemperature', si.cpuTemperature)
 
 		socket.on('disconnect', () => {
 			console.log('user disconnected')

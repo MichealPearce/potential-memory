@@ -1,6 +1,13 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { useState } from '../../includes/functions'
+import { Systeminformation } from 'systeminformation'
+import {
+	computed,
+	defineComponent,
+	onBeforeMount,
+	onMounted,
+	reactive,
+} from 'vue'
+import { useSocket } from '../../includes/functions'
 
 export default defineComponent({
 	name: 'DataCpu',
@@ -8,22 +15,63 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-const state = useState()
+const socket = useSocket()
+const currentLoad = reactive<Systeminformation.CurrentLoadData>({
+	avgLoad: 0,
+	currentLoad: 0,
+	currentLoadUser: 0,
+	currentLoadSystem: 0,
+	currentLoadNice: 0,
+	currentLoadIdle: 0,
+	currentLoadIrq: 0,
+	rawCurrentLoad: 0,
+	rawCurrentLoadUser: 0,
+	rawCurrentLoadSystem: 0,
+	rawCurrentLoadNice: 0,
+	rawCurrentLoadIdle: 0,
+	rawCurrentLoadIrq: 0,
+	cpus: [],
+})
 
-const cpu = computed(() => {
-	if (!state.dynamic.currentLoad) return 0
-	return state.dynamic.currentLoad.currentLoad
+const temp = reactive<Systeminformation.CpuTemperatureData>({
+	main: 0,
+	cores: [],
+	max: 0,
 })
 
 const cpuLoad = computed(() => {
-	if (!cpu.value) return 0
-	return `${cpu.value.toFixed(2)}%`
+	return `${currentLoad.currentLoad.toFixed(2)}%`
 })
 
 const cpuTemp = computed(() => {
-	if (!state.dynamic.temp) return 0
-	return `${state.dynamic.temp.main}°C`
+	return `${temp.main}°C`
 })
+
+let timer: any
+function fetchCurrentLoadData() {
+	socket.emit('currentLoad', (data: Systeminformation.CurrentLoadData) => {
+		Object.assign(currentLoad, data)
+	})
+}
+
+function fetchCPUTemp() {
+	socket.emit(
+		'cpuTemperature',
+		(data: Systeminformation.CpuTemperatureData) => {
+			Object.assign(temp, data)
+		},
+	)
+}
+
+onMounted(() => {
+	fetchCurrentLoadData()
+	timer = setInterval(() => {
+		fetchCurrentLoadData()
+		fetchCPUTemp()
+	}, 1000)
+})
+
+onBeforeMount(() => clearInterval(timer))
 </script>
 
 <template>
