@@ -8,6 +8,7 @@ import {
 	reactive,
 } from 'vue'
 import { datejs, useSocket, useState } from '../../includes/functions'
+import { useAuth } from '../../plugins/auth'
 
 export default defineComponent({
 	name: 'NavigationMain',
@@ -16,7 +17,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 const state = useState()
-
+const auth = useAuth()
 const socket = useSocket()
 
 const osName = computed(() => {
@@ -57,7 +58,7 @@ onBeforeMount(() => {})
 		</div>
 
 		<div class="menu">
-			<ConstructLink to="/">Home</ConstructLink>
+			{{ auth.current }}
 		</div>
 	</nav>
 </template>

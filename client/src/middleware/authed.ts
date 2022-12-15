@@ -1,5 +1,5 @@
 import { defineMiddleware } from '../includes/functions'
 
 export const authed = defineMiddleware((to, from, app) => {
-	console.log('authed', app.state)
+	if (!to.fullPath.startsWith('/login') && !app.auth.current) return '/login'
 })

@@ -14,6 +14,7 @@ export default defineConfig(env => {
 	const serverURL = envars.SERVER_URL ?? 'http://localhost:3001'
 
 	return {
+		envDir: '../',
 		envPrefix: 'CLIENT_',
 
 		css: {
