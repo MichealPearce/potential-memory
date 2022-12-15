@@ -19,31 +19,29 @@ const mem = computed(() => state.dynamic.mem)
 
 <template>
 	<div class="index-page">
-		<DataMemory />
-		<DataCpu />
-		<DataNetwork />
+		<aside class="left">
+			<DataCpu />
+			<DataMemory />
+			<DataNetwork />
+		</aside>
+
+		<aside class="right">
+			<DataStorage />
+		</aside>
 	</div>
 </template>
 
 <style lang="scss" scoped>
 .index-page {
-	@include flex(row, space-between, stretch);
+	@include flex(row, space-around);
 	padding: 1em;
-}
+	column-gap: 1em;
 
-.data-memory {
-	@include flex(column, center, center);
-
-	width: 33%;
-}
-.data-cpu {
-	@include flex(column, center, center);
-
-	width: 33%;
-}
-.data-network {
-	@include flex(row, center, center);
-
-	width: 33%;
+	.left,
+	.right {
+		@include flex(column, flex-start, stretch);
+		flex: 1;
+		row-gap: 1em;
+	}
 }
 </style>

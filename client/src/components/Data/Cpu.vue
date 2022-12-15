@@ -27,40 +27,40 @@ const cpuTemp = computed(() => {
 </script>
 
 <template>
-	<div class="data-cpu">
-		<h1>CPU</h1>
+	<DataCard
+		class="data-cpu"
+		title="CPU"
+	>
+		<DataCardTitle>CPU</DataCardTitle>
+
 		<div class="stat">
 			Current load:
 			<span class="cpu-percentage">{{ cpuLoad }}</span>
 		</div>
+
 		<div class="stat">
 			Current temperature:
 			<span class="cpu-temp">{{ cpuTemp }}</span>
 		</div>
-	</div>
+	</DataCard>
 </template>
 
 <style lang="scss" scoped>
-.data-cpu {
-	@include flex(column, center, center);
+.data-card.data-cpu {
+	@include flex(row, space-between, center);
 
-	font-weight: 400;
-	border: 1px solid white;
+	.cpu-percentage {
+		font-size: 2em;
+		font-weight: bold;
+	}
 
-	padding: 1em;
-}
+	.cpu-temp {
+		font-size: 2em;
+		font-weight: bold;
+	}
 
-.cpu-percentage {
-	font-size: 2em;
-	font-weight: bold;
-}
-
-.cpu-temp {
-	font-size: 2em;
-	font-weight: bold;
-}
-
-.stat {
-	@include flex(column, center, center);
+	.stat {
+		@include flex(column, center, center);
+	}
 }
 </style>

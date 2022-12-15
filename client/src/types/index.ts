@@ -6,8 +6,11 @@ import {
 	RouteMeta,
 } from 'vue-router'
 
-export interface DynamicData extends Systeminformation.DynamicData {
+export interface DynamicData
+	extends Omit<Systeminformation.DynamicData, 'networkStats' | 'fsSize'> {
 	temp: Systeminformation.CpuTemperatureData
+	networkStats: Systeminformation.NetworkStatsData[]
+	fsSize: Systeminformation.FsSizeData[]
 }
 
 export interface ClientState {

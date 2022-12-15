@@ -10,35 +10,61 @@ export default defineComponent({
 <script lang="ts" setup>
 const state = useState()
 
-const net = computed(() => {
-	if (!state.dynamic.inetLatency) return 0
-	return state.dynamic.inetLatency
+const latency = computed(() => {
+	const l = state.dynamic.inetLatency
+	if (!l) return 0
+	return `${l.toFixed(2)} ms`
 })
 
-const netUsed = computed(() => {
-	if (!net.value) return 0
-	return `${net.value.toFixed(2)} ms`
+const netInterfaces = computed(() => {
+	if (!state.dynamic.networkStats) return []
+	return state.dynamic.networkStats
 })
 </script>
 
 <template>
-	<div class="data-network">
-		<h1>Network Latency</h1>
-		<p class="net-used">{{ netUsed }}</p>
-	</div>
+	<DataCard class="data-network">
+		<header>
+			<DataCardTitle>Network</DataCardTitle>
+
+			<div class="latency">
+				<i class="fa-solid fa-clock" />
+				<span>{{ latency }}</span>
+			</div>
+		</header>
+
+		<div class="interfaces">
+			<DataNetInterface
+				v-for="netInf of netInterfaces"
+				:interface="netInf"
+			/>
+		</div>
+	</DataCard>
 </template>
 
 <style lang="scss" scoped>
 .data-network {
-	@include flex(column, center, center);
+	@include flex(column);
 
-	font-weight: 400;
-	border: 1px solid white;
+	header {
+		@include flex(row, space-between, center);
+		width: 100%;
+		margin-bottom: 1em;
 
-	padding: 2.75em;
-	&.net-used {
-		font-size: 5em;
-		font-weight: bold;
+		.latency {
+			@include flex(row, center, center);
+			column-gap: 0.5em;
+		}
+	}
+
+	.interfaces {
+		@include flex(column);
+		width: 100%;
+		row-gap: 1em;
+
+		.data-net-interface {
+			width: 100%;
+		}
 	}
 }
 </style>

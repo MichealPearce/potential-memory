@@ -19,7 +19,7 @@ const osName = computed(() => {
 const time = computed(() => {
 	const s = state.dynamic
 	if (!s.time) return '00:00:00'
-	return datejs(s.time.current).format('HH:mm:ss')
+	return datejs(s.time.current).format('h:mm a')
 })
 </script>
 

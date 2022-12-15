@@ -30,20 +30,21 @@ const percentageUsed = computed<number>(() => {
 </script>
 
 <template>
-	<div class="data-memory">
-		<h1>Memory Used</h1>
-		{{ memUsed }}
+	<DataCard
+		class="data-memory"
+		title="Memory"
+	>
+		<DataCardTitle>Memory</DataCardTitle>
+
+		<span class="used">{{ memUsed }}</span>
 		<ProgressBar :percentage="percentageUsed" />
-	</div>
+	</DataCard>
 </template>
 
 <style lang="scss" scoped>
 .data-memory {
-	@include flex(column, center, center);
-
-	font-weight: 400;
-	border: 1px solid white;
-
-	padding: 2.75em;
+	.data-card-title {
+		margin-bottom: 0.5em;
+	}
 }
 </style>

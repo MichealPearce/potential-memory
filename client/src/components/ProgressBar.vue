@@ -38,7 +38,7 @@ const percent = computed(() => `${props.percentage}%`)
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: v-bind(percentage);
+		width: v-bind(percent);
 		height: 100%;
 		background-color: #00bfff;
 		transition: width 0.5s ease-in-out;
