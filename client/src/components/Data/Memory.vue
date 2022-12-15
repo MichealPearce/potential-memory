@@ -1,7 +1,14 @@
 <script lang="ts">
 import { toNumber } from '@vue/shared'
-import { computed, defineComponent } from 'vue'
-import { formatBytes, useState } from '../../includes/functions'
+import { Systeminformation } from 'systeminformation'
+import {
+	computed,
+	defineComponent,
+	onBeforeMount,
+	onMounted,
+	reactive,
+} from 'vue'
+import { formatBytes, useSocket, useState } from '../../includes/functions'
 
 export default defineComponent({
 	name: 'DataMemory',
@@ -9,23 +16,48 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-const state = useState()
+const socket = useSocket()
 
-const mem = computed(() => {
-	return state.dynamic.mem
+const mem = reactive<Systeminformation.MemData>({
+	total: 0,
+	free: 0,
+	used: 0,
+	active: 0,
+	available: 0,
+	buffcache: 0,
+	buffers: 0,
+	cached: 0,
+	slab: 0,
+	swaptotal: 0,
+	swapused: 0,
+	swapfree: 0,
 })
 
 const memUsed = computed(() => {
-	if (!mem.value) return 0
-	return `${formatBytes(mem.value.active)} / ${formatBytes(mem.value.total)}`
+	return `${formatBytes(mem.active)} / ${formatBytes(mem.total)}`
 })
 
 const percentageUsed = computed<number>(() => {
-	if (!mem.value) {
-		return 0
-	}
-	const percentage = (mem.value.active / mem.value.total) * 100
+	if (!mem.total) return 0
+	const percentage = (mem.active / mem.total) * 100
 	return toNumber(percentage.toFixed(1))
+})
+
+let timer: any
+
+function fetchMemoryData() {
+	socket.emit('mem', (data: Systeminformation.MemData) => {
+		Object.assign(mem, data)
+	})
+}
+
+onMounted(() => {
+	fetchMemoryData()
+	timer = setInterval(fetchMemoryData, 1000)
+})
+
+onBeforeMount(() => {
+	clearInterval(timer)
 })
 </script>
 

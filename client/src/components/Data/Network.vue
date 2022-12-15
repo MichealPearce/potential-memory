@@ -1,6 +1,13 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { useState } from '../../includes/functions'
+import { Systeminformation } from 'systeminformation'
+import {
+	computed,
+	defineComponent,
+	onBeforeMount,
+	onMounted,
+	reactive,
+} from 'vue'
+import { useSocket, useState } from '../../includes/functions'
 
 export default defineComponent({
 	name: 'DataNetwork',
@@ -8,17 +15,35 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-const state = useState()
+const socket = useSocket()
 
-const latency = computed(() => {
-	const l = state.dynamic.inetLatency
-	if (!l) return 0
-	return `${l.toFixed(2)} ms`
+const networkStats = reactive({
+	interfaces: [] as Systeminformation.NetworkStatsData[],
+	latency: 0,
 })
 
-const netInterfaces = computed(() => {
-	if (!state.dynamic.networkStats) return []
-	return state.dynamic.networkStats
+let timer: any
+
+function fetchNetworkData() {
+	socket.emit('networkStats', (data: Systeminformation.NetworkStatsData[]) => {
+		networkStats.interfaces = data
+	})
+	socket.emit('inetLatency', (data: number) => {
+		networkStats.latency = data
+	})
+}
+
+onMounted(() => {
+	fetchNetworkData()
+	timer = setInterval(fetchNetworkData, 1000)
+})
+
+onBeforeMount(() => {
+	clearInterval(timer)
+})
+
+const latency = computed(() => {
+	return `${networkStats.latency.toFixed(2)} ms`
 })
 </script>
 
@@ -35,7 +60,7 @@ const netInterfaces = computed(() => {
 
 		<div class="interfaces">
 			<DataNetInterface
-				v-for="netInf of netInterfaces"
+				v-for="netInf of networkStats.interfaces"
 				:interface="netInf"
 			/>
 		</div>

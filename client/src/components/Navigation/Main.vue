@@ -1,6 +1,13 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { datejs, useState } from '../../includes/functions'
+import { Systeminformation } from 'systeminformation'
+import {
+	computed,
+	defineComponent,
+	onBeforeMount,
+	onMounted,
+	reactive,
+} from 'vue'
+import { datejs, useSocket, useState } from '../../includes/functions'
 
 export default defineComponent({
 	name: 'NavigationMain',
@@ -10,17 +17,36 @@ export default defineComponent({
 <script lang="ts" setup>
 const state = useState()
 
+const socket = useSocket()
+
 const osName = computed(() => {
 	const s = state.static
 	if (!s.os) return 'Construct'
 	return `${s.os.distro} ${s.os.release}`
 })
 
+const serverTime = reactive({
+	current: 0,
+	uptime: 0,
+	timezone: '',
+	timezoneName: '',
+})
+
+const setServerTime = (data: Systeminformation.TimeData) => {
+	Object.assign(serverTime, data)
+}
+
 const time = computed(() => {
 	const s = state.dynamic
-	if (!s.time) return '00:00:00'
-	return datejs(s.time.current).format('h:mm a')
+
+	return datejs(serverTime.current).format('h:mm a')
 })
+
+onMounted(() => {
+	socket.on('time', setServerTime)
+})
+
+onBeforeMount(() => {})
 </script>
 
 <template>

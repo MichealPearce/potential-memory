@@ -20,6 +20,8 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 
 	function emitDynamic() {
 		si.getDynamicData(undefined, undefined, data => io.emit('dynamic', data))
+
+		io.emit('time', si.time())
 		setTimeout(emitDynamic, 1000)
 	}
 
@@ -31,6 +33,9 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 		socket.on('fsSize', si.fsSize)
 		socket.on('currentLoad', si.currentLoad)
 		socket.on('cpuTemperature', si.cpuTemperature)
+		socket.on('mem', si.mem)
+		socket.on('networkStats', si.networkStats)
+		socket.on('inetLatency', si.inetLatency)
 
 		socket.on('disconnect', () => {
 			console.log('user disconnected')
@@ -38,5 +43,5 @@ export const registerSockets = definePlugin((instance: FastifyInstance) => {
 	})
 
 	instance.decorate('io', io)
-	emitDynamic()
+	// emitDynamic()
 })
