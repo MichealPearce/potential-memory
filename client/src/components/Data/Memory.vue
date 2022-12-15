@@ -30,10 +30,7 @@ const percentageUsed = computed<number>(() => {
 </script>
 
 <template>
-	<DataCard
-		class="data-memory"
-		title="Memory"
-	>
+	<DataCard class="data-memory">
 		<DataCardTitle>Memory</DataCardTitle>
 
 		<span class="used">{{ memUsed }}</span>

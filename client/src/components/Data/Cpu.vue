@@ -27,10 +27,7 @@ const cpuTemp = computed(() => {
 </script>
 
 <template>
-	<DataCard
-		class="data-cpu"
-		title="CPU"
-	>
+	<DataCard class="data-cpu">
 		<DataCardTitle>CPU</DataCardTitle>
 
 		<div class="stat">
